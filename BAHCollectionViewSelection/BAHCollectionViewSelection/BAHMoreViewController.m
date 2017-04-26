@@ -25,19 +25,7 @@ static NSString *collectionCellID = @"BAHCollectionViewCellID";
 
 @implementation BAHMoreViewController
 
-//- (NSMutableArray *)imagesArray
-//{
-//    if (!_imagesArray) {
-//        _imagesArray = [[NSMutableArray alloc] initWithCapacity:0];
-//        for (int i = 21; i < 30; i++) {
-//            [_imagesArray addObject:[NSString stringWithFormat:@"%d", i]];
-//        }
-//        [[NSUserDefaults standardUserDefaults] setObject:_imagesArray forKey:@"imagesArray2"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//    }
-//    return _imagesArray;
-//}
-
+#pragma mark - getters and setters
 - (UICollectionView *)collectionView
 {
     if (!_collectionView) {

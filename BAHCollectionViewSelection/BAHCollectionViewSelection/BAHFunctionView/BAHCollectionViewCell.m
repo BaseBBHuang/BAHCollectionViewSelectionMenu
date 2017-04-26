@@ -13,8 +13,30 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    [self addLongPressGesture];
     
-    
+}
+
+- (void)addLongPressGesture
+{
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGestureClick:)];
+    [self addGestureRecognizer:longPress];
+}
+
+- (void)longPressGestureClick:(id)sender
+{
+    NSLog(@"longPressGestureClick");
+    if ([self.delegate respondsToSelector:@selector(longPressGestureCallback:)]) {
+        [self.delegate longPressGestureCallback:self];
+    }
+}
+
+
+- (IBAction)deleteClick:(id)sender {
+    NSLog(@"delete");
+    if ([self.delegate respondsToSelector:@selector(didSelectedDeleteButton:atIndexPath:)]) {
+        [self.delegate didSelectedDeleteButton:self atIndexPath:_indexPath];
+    }
 }
 
 @end

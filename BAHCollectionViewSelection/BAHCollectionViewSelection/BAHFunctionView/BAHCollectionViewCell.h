@@ -8,10 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+@class BAHCollectionViewCell;
+
+@protocol BAHCollectionViewCellDelegate <NSObject>
+
+- (void)longPressGestureCallback:(BAHCollectionViewCell *)selectedCell;
+- (void)didSelectedDeleteButton:(BAHCollectionViewCell *)selectedCell atIndexPath:(NSIndexPath *)indexPath;
+
+@end
+
 @interface BAHCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+@property (strong, nonatomic) NSIndexPath *indexPath;
+@property (weak, nonatomic) id<BAHCollectionViewCellDelegate> delegate;
 @end
 
 

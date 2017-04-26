@@ -31,21 +31,38 @@
                             <constraint firstAttribute="height" constant="44" id="WVu-qU-m57"/>
                         </constraints>
                     </imageView>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FSv-0f-eqk">
+                        <rect key="frame" x="60.5" y="10" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="emP-ya-E3U"/>
+                            <constraint firstAttribute="width" constant="20" id="hTW-jP-PXA"/>
+                        </constraints>
+                        <state key="normal" title="d" image="delete.png"/>
+                        <connections>
+                            <action selector="deleteClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="uUg-1i-iAY"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="R5d-39-eGc" secondAttribute="bottom" constant="18" id="K25-R0-1Na"/>
+                <constraint firstItem="FSv-0f-eqk" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" constant="20" id="bZU-1X-iJk"/>
                 <constraint firstItem="CJL-If-Qde" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="-10" id="lq9-64-1rW"/>
                 <constraint firstItem="CJL-If-Qde" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="mne-gt-b7V"/>
+                <constraint firstItem="FSv-0f-eqk" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="-30" id="thA-sj-dfR"/>
                 <constraint firstItem="R5d-39-eGc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="uVW-dA-l1i"/>
                 <constraint firstAttribute="trailing" secondItem="R5d-39-eGc" secondAttribute="trailing" id="wHp-hp-5LA"/>
             </constraints>
             <size key="customSize" width="111" height="77"/>
             <connections>
+                <outlet property="deleteButton" destination="FSv-0f-eqk" id="Llt-Zf-svq"/>
                 <outlet property="imageView" destination="CJL-If-Qde" id="jbp-Dy-jsf"/>
                 <outlet property="titleLabel" destination="R5d-39-eGc" id="5ht-9L-dHt"/>
             </connections>
             <point key="canvasLocation" x="64" y="67"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="delete.png" width="40" height="40"/>
+    </resources>
 </document>

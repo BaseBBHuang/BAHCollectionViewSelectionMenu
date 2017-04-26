@@ -21,7 +21,7 @@ static NSString *collectionCellPlusID = @"BAHCollectionViewCellPlusID";
 #define RGBA(r,g,b,a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
 
 
-@interface BAHFunctionView ()<UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface BAHFunctionView ()<UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, BAHCollectionViewCellDelegate>
 
 @property (nonatomic, strong) UIPageControl *pageControl;
 //排满页面的 cell 个数
@@ -115,13 +115,13 @@ static NSString *collectionCellPlusID = @"BAHCollectionViewCellPlusID";
     else
     {
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionCellID forIndexPath:indexPath];
+        cell.delegate = self;
+        cell.indexPath = indexPath;
         cell.backgroundColor = [UIColor whiteColor];
         cell.imageView.image = [UIImage imageNamed:self.imagesArray[indexPath.row]];
     }
     
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGestureClick:)];
-    [cell addGestureRecognizer:longPress];
-    
+        
     return cell;
 }
 
@@ -149,6 +149,10 @@ static NSString *collectionCellPlusID = @"BAHCollectionViewCellPlusID";
     if ([cell isKindOfClass:[BAHCollectionViewCell class]])
     {
 //        NSLog(@"BAHCollectionViewCell");
+        BAHCollectionViewCell *celltemp = cell;
+        if (!celltemp.deleteButton.hidden) {
+            celltemp.deleteButton.hidden = YES;
+        }
     }
     else if ([cell isKindOfClass:[BAHCollectionViewCellPlus class]])
     {
@@ -169,17 +173,19 @@ static NSString *collectionCellPlusID = @"BAHCollectionViewCellPlusID";
     _pageControl.currentPage = (NSInteger)(scrollView.contentOffset.x / self.frame.size.width);
 }
 
-#pragma mark - UILongPressGestureRecognizer
-- (void)longPressGestureClick:(id)sender
+#pragma mark - BAHCollectionViewCellDelegate
+- (void)longPressGestureCallback:(BAHCollectionViewCell *)selectedCell
 {
-    NSLog(@"longPressGestureClick");
+    selectedCell.deleteButton.hidden = NO;
 }
 
-- (void)layoutSubviews
+- (void)didSelectedDeleteButton:(BAHCollectionViewCell *)selectedCell atIndexPath:(NSIndexPath *)indexPath
 {
-    [super layoutSubviews];
-    
-    NSLog(@"aaa");
+    selectedCell.deleteButton.hidden = YES;
+    [self.imagesArray removeObjectAtIndex:indexPath.row];
+    [self.collectionView reloadData];
 }
+
+
 
 @end
